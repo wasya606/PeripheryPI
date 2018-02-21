@@ -1,5 +1,5 @@
-#ifndef __DS3231_HARDWARE_H__VDYKYY__LUXOFT__
-#define __DS3231_HARDWARE_H__VDYKYY__LUXOFT__
+#ifndef __DS3231_HARDWARE_H__VDYKYY
+#define __DS3231_HARDWARE_H__VDYKYY
 #include "rtc_types.h"
 
 //------------------  DS3231 Hardware data ---------------------//
@@ -155,4 +155,4 @@ static const constexpr Reg8BitMask MSB_DATA_MASK                = 0b01111111;
 static const constexpr Reg8BitMask LSB_DATA_MASK                = 0b11000000;
 
 
-#endif // __DS3231_HARDWARE_H__VDYKYY__LUXOFT__
+#endif // __DS3231_HARDWARE_H__VDYKYY

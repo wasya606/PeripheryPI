@@ -25,7 +25,7 @@ void spiTransferCallback(const TaskId id, const uint32_t* data, const Byte lengt
 int main()
 {
 
-    constexpr Byte WHO_AM_I = 0b10001111;
+    //constexpr Byte WHO_AM_I = 0b10001111;
     //constexpr Byte TEMPERATURE_SENSOR = 0b10100110;
     //constexpr Byte CTL1 = 0b10100000;
     //constexpr Byte CTL1_EN = CTL1 & 0b01111111;
@@ -37,23 +37,22 @@ int main()
     //constexpr Byte nRF24L01_WRITE = 0b00111111;
 
     //constexpr Byte CAN_STATUS_CMD = 0b10100000;
-    //testApp.start();
-
-
 
     SPI::initSpi();
     //sleep(1);
 
     SpiSettings spiSettings;
-    spiSettings.setSpiMode(SpiMode::MODE1);
+    spiSettings.setSpiMode(SpiMode::MODE0);
     spiSettings.setChipSelectPolarity(CSPin::CS0, SignalPolarity::ACTIVE_LOW);
     spiSettings.setDataPolarity(SignalPolarity::ACTIVE_LOW);
-    spiSettings.setClockDivider(ClockDivider::DIV64);
+    spiSettings.setClockDivider(ClockDivider::DIV256);
 
     SPI::setupSpi(spiSettings);
 
     Common::printRegister32(SPI::get_SPI_CS_register());
     Common::printRegister32(SPI::get_SPI_CLK_register());
+
+    testApp.start();
 
 
     //uint32_t writeData1[2] = {CTL1_EN, CTL1_EN_XYZT};
@@ -66,15 +65,18 @@ int main()
     //SPI::spiTransferData(writeData2, 1, 3, &spiTransferCallback);
 
 
-    MCP3208 adc;
 
-    adc.addChannelToCyclicRead(ADC_Channel::CH1);
-    adc.addChannelToCyclicRead(ADC_Channel::CH2);
-    adc.addChannelToCyclicRead(ADC_Channel::CH4);
+    //MCP3208 adc;
 
+    //adc.addChannelToCyclicRead(ADC_Channel::CH1);
+    //adc.addChannelToCyclicRead(ADC_Channel::CH2);
+    //adc.addChannelToCyclicRead(ADC_Channel::CH4);
+
+    //adc.readChannelRequest(ADC_Channel::CH0, &spiTransferCallback);
     //adc.readChannelRequest(ADC_Channel::CH1, &spiTransferCallback);
+    //adc.readChannelRequest(ADC_Channel::CH2, &spiTransferCallback);
 
-    adc.enableCyclicRead();
+    //adc.enableCyclicRead();
 
 
 

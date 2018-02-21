@@ -1,5 +1,5 @@
-#ifndef __PERIPHERIAL_TYPES__VDYKYY__LUXOFT__
-#define __PERIPHERIAL_TYPES__VDYKYY__LUXOFT__
+#ifndef __PERIPHERIAL_TYPES__VDYKYY
+#define __PERIPHERIAL_TYPES__VDYKYY
 #include <cstdint>
 #include <cstddef>
 #include <functional>
@@ -151,4 +151,4 @@ namespace PeripheralTypes
 
 }
 
-#endif // __PERIPHERIAL_TYPES__VDYKYY__LUXOFT__
+#endif // __PERIPHERIAL_TYPES__VDYKYY

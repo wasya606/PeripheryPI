@@ -1,5 +1,5 @@
-#ifndef __PERIPHERY_ACCESS_H__VDYKYY__LUXOFT__
-#define __PERIPHERY_ACCESS_H__VDYKYY__LUXOFT__
+#ifndef __PERIPHERY_ACCESS_H__VDYKYY
+#define __PERIPHERY_ACCESS_H__VDYKYY
 
 #include "peripherial_types.h"
 
@@ -196,4 +196,4 @@ public:
 };
 
 
-#endif // __PERIPHERY_ACCESS_H__VDYKYY__LUXOFT__
+#endif // __PERIPHERY_ACCESS_H__VDYKYY

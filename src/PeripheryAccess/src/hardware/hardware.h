@@ -1,5 +1,5 @@
-#ifndef __HARDWARE_H_RPI3__VDYKYY__LUXOFT__
-#define __HARDWARE_H_RPI3__VDYKYY__LUXOFT__
+#ifndef __HARDWARE_H_RPI3__VDYKYY
+#define __HARDWARE_H_RPI3__VDYKYY
 #include "peripherial_types.h"
 
 using namespace PeripheralTypes;
@@ -180,4 +180,4 @@ public:
 
 #include "hardware.hpp"
 
-#endif // __HARDWARE_H_RPI3__VDYKYY__LUXOFT__
+#endif // __HARDWARE_H_RPI3__VDYKYY

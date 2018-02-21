@@ -7,6 +7,7 @@
 #include <iomanip>
 #include <string>
 #include <unistd.h>
+#include "test_mcp3208.h"
 
 #define LED1_GPIO_PIN 5
 #define LED2_GPIO_PIN 6
@@ -43,30 +44,21 @@ void TestApp::start()
 
 void TestApp::createMenu()
 {
-    menu = new Menu("********** PERIPERY TEST **********", bind(&TestApp::mainMenuHandler, this, _1));
-    menu->pushItem("-------------- LEDS -------------", true);
-    menu->pushItem("Turn ON leds of LED1  group      ");
-    menu->pushItem("Turn OFF leds of LED1 group      ");
-    menu->pushItem("Turn ON leds of LED2  group      ");
-    menu->pushItem("Turn OFF leds of LED2 group      ");
-    menu->pushItem("Perform 10 blinks for LED1       ");
-    menu->pushItem("Perform 10 blinks for LED2       ");
-    menu->pushItem("Perform 10 blinks for all LEDS   ");
-    menu->pushItem("------------- BUZZER ------------", true);
-    menu->pushItem("Activate BUZZER                  ");
-    menu->pushItem("Deactivate BUZZER                ");
-    menu->pushItem("Perform 10 BUZZER beeps          ");
-    menu->pushItem("-------------- RTC --------------", true);
+    menu = new Menu("********** PERIPERY LIBRARY MINI TEST **********", bind(&TestApp::mainMenuHandler, this, _1));
+    menu->pushItem("-------------- GPIO -------------", true);
+    menu->pushItem("Write \"HIGH\" to GPIO #5        ");
+    menu->pushItem("Write \"LOW\" to GPIO #5         ");
+    menu->pushItem("Read from GPIO #6                ");
+    menu->pushItem("------ RTC DS3231 (I2C1) --------", true);
     menu->pushItem("Show Date/Time from RTC(I2C1)    ");
     menu->pushItem("Write system Date/Time to RTC    ");
-    menu->pushItem("------------ EEPROM -------------", true);
+    menu->pushItem("--------- EEPROM 24Cxx ----------", true);
     menu->pushItem("Read from EEPROM on I2C0 (ASCII) ");
     menu->pushItem("Read from EEPROM on I2C0 (RAW)   ");
     menu->pushItem("Write to EEPROM  on I2C0 (ASCII) ");
     menu->pushItem("Write to EEPROM  on I2C0 (RAW)   ");
-    menu->pushItem("----------  Internal LED ---------", true);
-    menu->pushItem("Turn ON internal LED             ");
-    menu->pushItem("Turn ON internal LED             ");
+    menu->pushItem("------  ADC MCP3208 (SPI0) ------", true);
+    menu->pushItem("Read ADC channels                ");
     menu->pushItem("---------------------------------", true);
     menu->pushItem("Exit                             ");
 
@@ -79,101 +71,43 @@ void TestApp::mainMenuHandler(MenuItem *item)
     {
         case 0:
         {
-            //TITLE. DO NOTHING
+            //GPIO TITLE. DO NOTHING
             break;
         }
-        case 1:
+        case 1://Write "HIGH" to GPIO
         {
             Menu::clearScreen();
-            activateLeds1(true);
-            showResult("The leds of LED1 group is turned ON!");
+            TestGpio::writeGpio5(true);
+            showResult();
             break;
         }
-        case 2:
+        case 2://Write "LOW" to GPIO
         {
             Menu::clearScreen();
-            activateLeds1(false);
-            showResult("The leds of LED1 group is turned OFF!");
+            TestGpio::writeGpio5(false);
+            showResult();
             break;
         }
-        case 3:
+        case 3://Read GPIO
         {
             Menu::clearScreen();
-            activateLeds2(true);
-            showResult("The leds of LED2 group is turned ON!");
+            TestGpio::readGpio6();
+            showResult();
             break;
         }
         case 4:
         {
-            Menu::clearScreen();
-            activateLeds2(false);
-            showResult("The leds of LED2 group is turned OFF!");
+            //RTC DS3231 (I2C1) TITLE. DO NOTHING
             break;
         }
-        case 5:
-        {
-            Menu::clearScreen();
-            cout << "\n\n\t Please wait...\n";
-            doCycles(LED1_GPIO_PIN, 10);
-            showResult("Has been performed 10 blinks of LED1!");
-            break;
-        }
-        case 6:
-        {
-            Menu::clearScreen();
-            cout << "\n\n\t Please wait...\n";
-            doCycles(LED2_GPIO_PIN, 10);
-            showResult("Has been performed 10 blinks of LED2!");
-            break;
-        }
-        case 7:
-        {
-            Menu::clearScreen();
-            cout << "\n\n\t Please wait...\n";
-            doCycles(LED1_GPIO_PIN, 10, LED2_GPIO_PIN, 250000, 250000);
-            showResult("Has been performed 10 blinks of all leds!");
-            break;
-        }
-        case 8:
-        {
-            //TITLE. DO NOTHING
-            break;
-        }
-        case 9:
-        {
-            Menu::clearScreen();
-            activateBuzzer(true);
-            showResult("The Buzzer is activated!!! You should be heard the signal!!!");
-            break;
-        }
-        case 10:
-        {
-            Menu::clearScreen();
-            activateBuzzer(false);
-            showResult("The Buzzer is dectivated!");
-            break;
-        }
-        case 11:
-        {
-            Menu::clearScreen();
-            cout << "\n\n\t Please wait...\n";
-            doCycles(BUZZER_GPIO_PIN, 10, 255, 100000, 250000);
-            showResult("Has been performed 10 beeps!");
-            break;
-        }
-        case 12:
-        {
-            //TITLE. DO NOTHING
-            break;
-        }
-        case 13:
+        case 5://Show Date/Time from RTC(I2C1)
         {
             Menu::clearScreen();
             outCurrentRtcDateTime();
             showResult();
             break;
         }
-        case 14:
+        case 6://Write system Date/Time to RTC
         {
             Menu::clearScreen();
             setRtcFromLocalDateTime();
@@ -182,63 +116,56 @@ void TestApp::mainMenuHandler(MenuItem *item)
             showResult("RTC has been writed from system time!");
             break;
         }
-        case 15:
+        case 7:
         {
-            //TITLE. DO NOTHING
+            //EEPROM 24Cxx TITLE. DO NOTHING
             break;
         }
-        case 16:
+        case 8://Read from EEPROM on I2C0 (ASCII)
         {
             Menu::clearScreen();
             readEEPROM();
             showResult();
             break;
         }
-        case 17:
+        case 9://Read from EEPROM on I2C0 (RAW)
         {
             Menu::clearScreen();
             readEEPROM(false);
             showResult();
             break;
         }
-        case 18:
+        case 10://Write to EEPROM  on I2C0 (ASCII)
         {
             Menu::clearScreen();
             writeEEPROM();
             showResult();
             break;
         }
-        case 19:
+        case 11://"Write to EEPROM  on I2C0 (RAW)
         {
             Menu::clearScreen();
             showResult("Not implemented yet\n");
             break;
         }
-        case 20:
+        case 12:
+        {
+            //ADC MCP3208 (SPI0) TITLE. DO NOTHING
+            break;
+        }
+        case 13://Read ADC channels
+        {
+            Menu::clearScreen();
+            TestMCP3208::testAdc();
+            showResult();
+            break;
+        }
+        case 14:
         {
             //TITLE. DO NOTHING
             break;
         }
-        case 21:
-        {
-            Menu::clearScreen();
-            PeripheryAccess::setGpioValue(5, LOW);
-            showResult("The internal led is turned ON!");
-            break;
-        }
-        case 22:
-        {
-            Menu::clearScreen();
-            PeripheryAccess::setGpioValue(5, HIGH);
-            showResult("The internal led is turned OFF!");
-            break;
-        }
-        case 23:
-        {
-            //TITLE. DO NOTHING
-            break;
-        }
-        case 24:
+        case 15:
         {
             exit(0);
             break;

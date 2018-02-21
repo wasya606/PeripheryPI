@@ -1,5 +1,5 @@
-#ifndef __RTC_TYPES_H__VDYKYY__LUXOFT__
-#define __RTC_TYPES_H__VDYKYY__LUXOFT__
+#ifndef __RTC_TYPES_H__VDYKYY
+#define __RTC_TYPES_H__VDYKYY
 #include "peripherial_types.h"
 
 using namespace PeripheralTypes;
@@ -34,4 +34,4 @@ struct DateTime
 
 }
 
-#endif // __RTC_TYPES_H__VDYKYY__LUXOFT__
+#endif // __RTC_TYPES_H__VDYKYY

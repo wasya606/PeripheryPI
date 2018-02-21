@@ -1,5 +1,5 @@
-#ifndef __HARDWARE_HPP_RPI3__VDYKYY__LUXOFT__
-#define __HARDWARE_HPP_RPI3__VDYKYY__LUXOFT__
+#ifndef __HARDWARE_HPP_RPI3__VDYKYY
+#define __HARDWARE_HPP_RPI3__VDYKYY
 #include "hardware.h"
 #include <cstddef>
 #include <fcntl.h>
@@ -54,4 +54,4 @@ constexpr SpiHardwareData Hardware::SPI_HARDWARE_DATA()
     return SpiHardwareData(SPI0_BASE_ADDRESS, 9, 10, 11, 8, 7, WRONG_PIN, ALT0);
 }
 
-#endif //__HARDWARE_HPP_RPI3__VDYKYY__LUXOFT__
+#endif //__HARDWARE_HPP_RPI3__VDYKYY

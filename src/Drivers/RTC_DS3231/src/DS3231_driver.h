@@ -1,5 +1,5 @@
-#ifndef __DS3231_DRIVER_H__VDYKYY__LUXOFT__
-#define __DS3231_DRIVER_H__VDYKYY__LUXOFT__
+#ifndef __DS3231_DRIVER_H__VDYKYY
+#define __DS3231_DRIVER_H__VDYKYY
 #include "rtc_types.h"
 #include "peripherial_access.h"
 #include "DS3231_hardware.h"
@@ -210,4 +210,4 @@ private:
 
 };
 
-#endif // __DS3231_DRIVER_H__VDYKYY__LUXOFT__
+#endif // __DS3231_DRIVER_H__VDYKYY

@@ -1,6 +1,7 @@
 #ifndef __TESTAPP_H__VDYKYY__
 #define __TESTAPP_H__VDYKYY__
 #include "Menu/menu.h"
+#include "test_gpio.h"
 #include "peripherial_access.h"
 #include "DS3231_driver.h"
 
